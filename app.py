@@ -24,10 +24,6 @@ navbar = dmc.Navbar(
             href="/",
         ),
         dmc.NavLink(
-            label="Model",
-            href="/model",
-        ),
-        dmc.NavLink(
             label="About",
             href="/about",
         ),

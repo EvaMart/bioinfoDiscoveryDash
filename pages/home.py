@@ -67,12 +67,12 @@ def layout():
         withNormalizeCSS=True,
         children=[
             dmc.Space(h=20),
-            dmc.Title('Repositories',order=1),
+            #dmc.Title('Repositories',order=1, weight=300),
             cards,
             dmc.Space(h=20),
-            dmc.Title('Bioinformatics Repositories',order=2),
+            dmc.Title('Bioinformatic Repositories',order=2, weight=300),
             bioinformatics,
-            dmc.Title('Non-Bioinformatics Repositories',order=2),
+            dmc.Title('Non-Bioinformatic Repositories',order=2, weight=300),
             bioinformatics
             ]
     )
