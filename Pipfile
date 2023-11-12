@@ -8,6 +8,9 @@ dash = "*"
 pandas = "*"
 dash-mantine-components = "*"
 dash-iconify = "*"
+scipy = "*"
+python-dotenv = "*"
+pymongo = "*"
 
 [dev-packages]
 
