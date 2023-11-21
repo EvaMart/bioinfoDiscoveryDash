@@ -117,10 +117,21 @@ dfNonBioinformatics['date'] = dfNonBioinformatics['date'].dt.date
 dffNonBioinformatics = dfNonBioinformatics.groupby(["date"])['count'].sum().reset_index()
 
 
-#dfBioinformatics_90['date'] = pd.to_datetime(dfBioinformatics_90['date'])
+
+if len(dfBioinformatics_90) > 0:
+    dfBioinformatics_90['date'] = pd.to_datetime(dfBioinformatics_90['date'])
+    # remove hour and minutes
+    dfBioinformatics_90['date'] = dfBioinformatics_90['date'].dt.date
+    dffBioinformatics_90 = dfBioinformatics_90.groupby(["date"])['count'].sum().reset_index()
+else:
+    # in order to have this trace visible (although at zero),
+    #  generate zero counts for dates in dfNonBioinformatics
+    dfBioinformatics_90['date'] = dfNonBioinformatics['date']
+    dfBioinformatics_90['prediction'] = [0 for i in range(len(dfNonBioinformatics))]
+    dffBioinformatics_90 = dfBioinformatics_90
 
 readmes_count_line_chart = go.Figure(data=go.Scatter(x=dffBioinformatics['date'], y=dffBioinformatics['count'], name="Bioinformatics", line=dict(color="#EFACBA", width=1.5)))
-#readmes_count_line_chart.add_trace(go.Scatter(x=dfBioinformatics_90['date'], y=dfBioinformatics_90['prediction'], name="Bioinformatics (conf>0.9)", line=dict(color="#EA526E", width=1.5)))
+readmes_count_line_chart.add_trace(go.Scatter(x=dffBioinformatics_90['date'], y=dffBioinformatics_90['prediction'], name="Bioinformatics (conf>0.9)", line=dict(color="#EA526E", width=1.5)))
 readmes_count_line_chart.add_trace(go.Scatter(x=dffNonBioinformatics['date'], y=dffNonBioinformatics['count'], name="Non-bioinformatics", line=dict(color="#89ABE3", width=1.5)))
 
 readmes_count_line_chart.update_layout(
